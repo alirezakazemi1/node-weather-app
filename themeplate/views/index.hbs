@@ -15,6 +15,7 @@
     <input type="text" id="input" placeholder="tehran,iran">
     <button type="submit" id="btn" onclick="getData()">GET!</button>
     <div>
+        <p style="color: seagreen;" id="loading"></p>
         <p id="place"></p>
         <p id="weather"></p>
         <p id="weather_description"></p>
@@ -27,6 +28,7 @@
     {{>footer}}
 
     <script>
+        var loading = document.getElementById('loading');
         var place = document.getElementById('place');
         var weather = document.getElementById('weather');
         var weather_description = document.getElementById('weather_description');
@@ -39,8 +41,10 @@
             if (input.value == '') {
                 return error.innerHTML = "give a address please!"
             }
+            loading.textContent = 'Loading...';
             fetch('/api/weather?location=' + input.value).then((response) => {
                 response.json().then((data) => {
+                    loading.textContent = '';
                     if (data.error) {
                         return error.textContent = data.error
                     }
