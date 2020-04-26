@@ -5,11 +5,11 @@ const hbs = require("hbs");
 const path = require("path");
 
 const app = express();
+const port = process.env.PORT || 3000;
 
 const publicDirectory = path.join(__dirname, "/public");
 const viewDirectory = path.join(__dirname, "/themeplate/views");
 const partialsDirectory = path.join(__dirname, "/themeplate/partials");
-console.log(partialsDirectory);
 
 app.set("view engine", "hbs");
 app.set("views", viewDirectory);
@@ -56,6 +56,6 @@ app.get("*", (req, res) => {
   res.render("404");
 });
 
-app.listen(3000, () => {
+app.listen(port, () => {
   console.log("Server is running!");
 });
