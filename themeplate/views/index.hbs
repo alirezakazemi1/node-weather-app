@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zeus</title>
+    {{>links}}
+</head>
+
+<body>
+    {{>navigation}}
+    <h2>Welcome to Zeus Forcast</h2>
+    <div>Weather for every place!</div>
+    <input type="text" id="input" placeholder="tehran,iran">
+    <button type="submit" id="btn" onclick="getData()">GET!</button>
+    <div>
+        <p id="place"></p>
+        <p id="weather"></p>
+        <p id="weather_description"></p>
+        <p id="cloud"></p>
+        <p id="temp"></p>
+        <p id="error" style="color: red;"></p>
+    </div>
+
+    <hr>
+    {{>footer}}
+
+    <script>
+        var place = document.getElementById('place');
+        var weather = document.getElementById('weather');
+        var weather_description = document.getElementById('weather_description');
+        var cloud = document.getElementById('cloud');
+        var temp = document.getElementById('temp');
+        var error = document.getElementById('error');
+        var input = document.getElementById('input');
+
+        function getData() {
+            if (input.value == '') {
+                return error.innerHTML = "give a address please!"
+            }
+            fetch('/api/weather?location=' + input.value).then((response) => {
+                response.json().then((data) => {
+                    if (data.error) {
+                        return error.textContent = data.error
+                    }
+                    place.innerHTML = 'Location: ' + data.place;
+                    weather.innerHTML = 'Today: ' + data.current.weather[0].main;
+                    weather_description.innerHTML = 'Full data: ' + data.current.weather[0].description;
+                    cloud.innerHTML = 'Clude: ' + data.current.clouds;
+                    temp.innerHTML = 'Temprature: ' + data.current.temp;
+                })
+            })
+        }
+
+
+    </script>
+</body>
+
+</html>

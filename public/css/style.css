@@ -1,0 +1,26 @@
+body {
+  background-color: aliceblue;
+  font-family: "Nunito", sans-serif;
+  width: 60rem;
+  margin: auto;
+  border: 1px solid #e7e7e7;
+  padding: 0.5rem 2rem;
+}
+ul {
+  list-style-type: none;
+}
+.navigation {
+  width: 10rem;
+  display: flex;
+  justify-content: space-around;
+}
+.navigation li {
+  border-right: 1px #e7e7e7 solid;
+}
+.navigation a {
+  color: blue;
+  font-weight: bold;
+  font-size: 18px;
+  text-decoration: none;
+  padding: 1rem;
+}
